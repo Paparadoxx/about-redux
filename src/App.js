@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import { fetchCustomers } from './asyncActions/fetchCustomers';
 import { addCustomerAction, removeCustomerAction } from './store/customerReducer';
 
 
@@ -45,12 +46,18 @@ function App() {
           onClick={() => addCustomer(prompt())}
           >Добавить клиента
         </button>
+        <button 
+          type='button'
+          onClick={() => dispatch(fetchCustomers())}
+          >Добавить клиентов из базы
+        </button>
   
         </div>
         {customers.length > 0 ?
           <div>
             {customers.map(customer =>
               <div style={{fontSize:'2rem', border: `black 1px solid`, padding:'15px'}}
+                key={customer.id}
                 onClick={()=> removeCustomer(customer)}
               >
                 {customer.name}
